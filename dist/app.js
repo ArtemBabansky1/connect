@@ -29,7 +29,10 @@ document.querySelectorAll('details').forEach(details => {
     const startHeight = details.getBoundingClientRect().height;
     const opening = !details.open;
     if (opening) details.open = true;
-    const endHeight = opening ? details.getBoundingClientRect().height : summary.getBoundingClientRect().height;
+    const style = getComputedStyle(details);
+    const detailsEdges = ['paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth']
+      .reduce((sum, property) => sum + (parseFloat(style[property]) || 0), 0);
+    const endHeight = opening ? details.getBoundingClientRect().height : summary.getBoundingClientRect().height + detailsEdges;
     details.style.overflow = 'hidden';
     animation = details.animate({ height: [`${startHeight}px`, `${endHeight}px`] }, { duration: 420, easing: 'cubic-bezier(.2,.75,.2,1)' });
     animation.onfinish = () => {

@@ -107,7 +107,7 @@
   .topics { transform:none!important; }
 }
 
-/* Speaker portraits and always-visible introductions. */
+/* Speaker portraits and compact, expandable introductions. */
 :root {
   --speaker-photo-size:clamp(128px, 12vw, 176px);
   --speaker-gap:24px;
@@ -125,6 +125,17 @@
 .speaker-intro { margin-top:24px; padding-top:24px; border-top:1px solid var(--line); color:var(--speaker-intro-color); font-size:16px; line-height:1.6; }
 .speaker-intro p { margin:0; }
 .speaker-intro p + p { margin-top:16px; }
+.speaker-intro summary { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:44px; cursor:pointer; list-style:none; }
+.speaker-intro summary::-webkit-details-marker { display:none; }
+.speaker-intro summary svg { width:24px; height:24px; flex-shrink:0; color:var(--ink); transition:transform .25s var(--ease); }
+.speaker-intro-expanded { display:none; }
+.speaker-intro[open] .speaker-intro-preview { display:none; }
+.speaker-intro[open] .speaker-intro-expanded { display:inline; }
+.speaker-intro[open] summary svg { transform:rotate(45deg); }
+.speaker-intro-body { padding-top:16px; }
+@media(prefers-reduced-motion:reduce) {
+  .speaker-intro summary svg { transition:none; }
+}
 @media(max-width:999px) {
   .speaker-grid { grid-template-columns:1fr; }
 }

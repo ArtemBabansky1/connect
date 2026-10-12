@@ -29,12 +29,30 @@ speaker_data = [
 ]
 speakers = ''
 for i,(name,bio,topic,portrait,more) in enumerate(speaker_data):
+    preview_words = []
+    word_count = 0
+    for word in bio.split():
+        preview_words.append(word)
+        word_count += bool(re.search(r'\w', word))
+        if word_count == 5:
+            break
+    if word_count == 5 and preview_words[-1].lower() in {'и', 'а', 'в', 'на', 'по', 'с', 'к', 'у', 'о', 'из', 'от', 'для', 'не', 'но'}:
+        preview_words.pop()
+    preview = ' '.join(preview_words)
+    full_intro = f'<p>{escape(bio)}</p>{more}'
+    if len(preview_words) < len(bio.split()) or more:
+        intro = f'''<details class="speaker-intro">
+          <summary aria-label="Интро: {escape(name)}"><span class="speaker-intro-preview">{escape(preview)}…</span><span class="speaker-intro-expanded">{escape(name)}</span>{icon('plus')}</summary>
+          <div class="speaker-intro-body">{full_intro}</div>
+        </details>'''
+    else:
+        intro = f'<div class="speaker-intro">{full_intro}</div>'
     speakers += f'''<article class="speaker reveal speaker-{i+1}">
       <div class="speaker-header">
         <div class="speaker-photo"><img src="assets/speaker-{portrait}.jpg" width="1254" height="1254" loading="lazy" alt="{escape(name)}"></div>
         <div class="speaker-heading"><h3>{escape(name.split(' ', 1)[0])}<br>{escape(name.split(' ', 1)[1])}</h3><p class="speaker-topic">{escape(topic)}</p></div>
       </div>
-      <div class="speaker-intro"><p>{escape(bio)}</p>{more}</div>
+      {intro}
     </article>'''
 faq = ''
 for n,body in [(51,[52,53]),(54,[55,56]),(57,[58])]:
