@@ -36,11 +36,6 @@
 .audience-art { width:min(100%,470px); aspect-ratio:1; margin-top:20px; }
 .audience-art img { width:100%; height:100%; object-fit:contain; }
 .speaker, .speaker-2, .speaker-3, .speaker-4 { background:var(--white); border-color:var(--line); }
-.speaker { min-height:456px; }
-.speaker h3 { min-height:2.36em; max-width:100%; }
-.speaker-topic { min-height:106px; }
-.speaker-4 .speaker-symbol { background:#ffdcc5; }
-.speaker-details summary { min-height:44px; }
 .registration { padding-bottom:0; }
 .registration-bottom { justify-content:flex-start; margin-top:40px; margin-bottom:64px; }
 .registration .event-marquee { margin-top:0; }
@@ -58,8 +53,6 @@
   .scroll-ready .topics { grid-auto-columns:calc((100% - var(--rail-peek) - 32px)/2); }
   .topic { min-height:450px; padding:24px; }
   .topic-art { height:185px; }
-  .speaker { min-height:458px; }
-  .speaker-topic { min-height:132px; }
 }
 @media(max-width:767px) {
   :root { --header-height:80px; --ribbon-height:64px; }
@@ -84,10 +77,6 @@
   .audience-aside { grid-template-columns:1fr; }
   .audience-aside h2 { font-size:37px; max-width:340px; }
   .audience-art { width:80%; max-width:330px; margin:20px auto 0; }
-  .speaker { min-height:426px; }
-  .speaker h3 { font-size:35px; }
-  .speaker-topic { min-height:125px; }
-  .speaker-details { margin-top:24px; }
   .registration-bottom { margin-top:30px; margin-bottom:44px; }
 }
 @media(prefers-reduced-motion:reduce) {
@@ -116,4 +105,36 @@
   .program-scroll { height:auto!important; }
   .program-pin { position:static!important; }
   .topics { transform:none!important; }
+}
+
+/* Speaker portraits and always-visible introductions. */
+:root {
+  --speaker-photo-size:clamp(128px, 12vw, 176px);
+  --speaker-gap:24px;
+  --speaker-name-size:clamp(24px, 2.35vw, 32px);
+  --speaker-intro-color:var(--muted);
+}
+.speaker-grid { grid-template-columns:repeat(2,minmax(0,1fr)); align-items:stretch; }
+.speaker { min-height:0; padding:32px; }
+.speaker-header { display:grid; grid-template-columns:var(--speaker-photo-size) minmax(0,1fr); gap:var(--speaker-gap); align-items:start; }
+.speaker-photo { aspect-ratio:1; overflow:hidden; border:1px solid var(--line); border-radius:calc(var(--radius) / 2); background:var(--white); }
+.speaker-photo img { display:block; width:100%; height:100%; object-fit:cover; }
+.speaker-heading { min-width:0; }
+.speaker h3 { min-height:0; max-width:none; margin:0 0 16px; font-size:var(--speaker-name-size); line-height:1.18; }
+.speaker-topic { min-height:0; font-size:16px; line-height:1.5; margin:0; }
+.speaker-intro { margin-top:24px; padding-top:24px; border-top:1px solid var(--line); color:var(--speaker-intro-color); font-size:16px; line-height:1.6; }
+.speaker-intro p { margin:0; }
+.speaker-intro p + p { margin-top:16px; }
+@media(max-width:999px) {
+  .speaker-grid { grid-template-columns:1fr; }
+}
+@media(max-width:767px) {
+  :root { --speaker-photo-size:112px; --speaker-gap:16px; --speaker-name-size:26px; }
+  .speaker { padding:24px; }
+}
+@media(max-width:419px) {
+  :root { --speaker-photo-size:88px; --speaker-gap:16px; --speaker-name-size:22px; }
+  .speaker { padding:16px; }
+  .speaker h3 { margin-bottom:12px; }
+  .speaker-topic { font-size:14px; }
 }

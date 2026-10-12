@@ -22,17 +22,19 @@ extras = ''.join(f'<li class="reveal">{icon(ico)}<p>{t(n)}</p></li>' for n,ico i
 audience = ''.join(f'<li class="reveal"><span aria-hidden="true">0{i+1}</span><p>{t(n)}</p>{icon("arrow-up-right")}</li>' for i,n in enumerate(range(24,29)))
 
 speaker_data = [
-    ('Екатерина Скворцова', lines[32].split('Екатерина Скворцова ')[1].split(' Тема:')[0], 'Тема:'+lines[32].split('Тема:')[1], 'messages-square', ''),
-    ('Илья Васюков', '[интро]', 'Тема:'+lines[33].split('Тема:')[1], 'waypoints', ''),
-    ('Евгения Нестерова', lines[34].split('Евгения Нестерова ')[1].strip(), lines[35].strip(), 'compass', ''),
-    (lines[36], lines[37], lines[41], 'network', ''.join(f'<p>{t(n)}</p>' for n in [39,40,41,43,44,45])),
+    ('Екатерина Скворцова', lines[32].split('Екатерина Скворцова ')[1].split(' Тема:')[0], 'Тема:'+lines[32].split('Тема:')[1], 'ekaterina', ''),
+    ('Илья Васюков', '[интро]', 'Тема:'+lines[33].split('Тема:')[1], 'ilya', ''),
+    ('Евгения Нестерова', lines[34].split('Евгения Нестерова ')[1].strip(), lines[35].strip(), 'evgeniya', ''),
+    (lines[36], lines[37], lines[41], 'anastasia', ''.join(f'<p>{t(n)}</p>' for n in [39,40,41,43,44,45])),
 ]
 speakers = ''
-for i,(name,bio,topic,ico,more) in enumerate(speaker_data):
+for i,(name,bio,topic,portrait,more) in enumerate(speaker_data):
     speakers += f'''<article class="speaker reveal speaker-{i+1}">
-      <div class="speaker-top"><span class="index" aria-hidden="true">0{i+1}</span><div class="speaker-symbol">{icon(ico)}</div></div>
-      <h3>{escape(name.split(' ', 1)[0])}<br>{escape(name.split(' ', 1)[1])}</h3><p class="speaker-topic">{escape(topic)}</p>
-      <details class="speaker-details"><summary><span>{escape(name)}</span>{icon('plus')}</summary><div class="details-body"><p>{escape(bio)}</p>{more}</div></details>
+      <div class="speaker-header">
+        <div class="speaker-photo"><img src="assets/speaker-{portrait}.jpg" width="1254" height="1254" loading="lazy" alt="{escape(name)}"></div>
+        <div class="speaker-heading"><h3>{escape(name.split(' ', 1)[0])}<br>{escape(name.split(' ', 1)[1])}</h3><p class="speaker-topic">{escape(topic)}</p></div>
+      </div>
+      <div class="speaker-intro"><p>{escape(bio)}</p>{more}</div>
     </article>'''
 faq = ''
 for n,body in [(51,[52,53]),(54,[55,56]),(57,[58])]:

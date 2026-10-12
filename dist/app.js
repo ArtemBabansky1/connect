@@ -102,18 +102,3 @@ document.addEventListener('visibilitychange', () => {
   else if (activeProgram) startProgram();
 });
 measureProgram();
-
-// Keep every collapsed speaker card equal even when typography wraps differently.
-const speakerGrid = document.querySelector('.speaker-grid');
-const speakerTopics = [...document.querySelectorAll('.speaker-topic')];
-let speakerWidth = 0;
-function alignSpeakerTopics(force = false) {
-  const width = speakerGrid.clientWidth;
-  if (!force && width === speakerWidth) return;
-  speakerWidth = width;
-  speakerTopics.forEach(topic => { topic.style.minHeight = '0'; });
-  const height = Math.max(106, ...speakerTopics.map(topic => topic.getBoundingClientRect().height));
-  speakerTopics.forEach(topic => { topic.style.minHeight = `${height}px`; });
-}
-new ResizeObserver(() => alignSpeakerTopics()).observe(speakerGrid);
-document.fonts.ready.then(() => alignSpeakerTopics(true));

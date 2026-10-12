@@ -1,0 +1,31 @@
+{
+  "tool": "built-in imagegen",
+  "primary_prompt": "Use case: identity-preserve. Edit target: the attached single speaker photo. Produce ONE square photographic portrait for an event website. Replace only the background with pure solid white (#FFFFFF), remove all background objects, and reframe to head and shoulders. Preserve the person's EXACT identity, facial geometry, facial expression, gaze, hair, age, skin texture and original clothing; no beautification, no new face, no invented accessories. Keep their natural head tilt/pose. Harmonize exposure gently for natural skin, retain realistic detail. Matching set framing: hair crown at about 8% of frame height, chin at about 62% of height, face centered horizontally, shoulders visible in the bottom third, head (crown to chin) about 54% of image height. Do not crop the top of hair. Chest-up lower edge at shoulders/upper chest. Every portrait must use the same apparent head scale and square aspect ratio. Background must be flat opaque white, no vignette, no gray gradient, no decorative frame, no text, no watermark. Preserve any hand touching the face if present.",
+  "scale_refinement_prompt": "Use case: identity-preserve. Image 1 is the edit target and ONLY source of identity, face, hair, clothing and pose. Image 2 is ONLY a framing and head-scale reference; never copy its person's features or clothing. Create one square pure-white background head-and-shoulders portrait of the person in IMAGE 1. Preserve exact facial identity, expression, gaze, head tilt, hair, skin detail, original clothing and hand at face if present. Match the head scale of Image 2 precisely: hair crown approximately y=90 in a 1254x1254 image; chin approximately y=750; head from crown to chin spans about 53% of frame height, centered horizontally. Zoom out enough to match Image 2, with shoulders visible below and lower crop on upper chest. Plain flat opaque white #FFFFFF background. Natural photograph, no beautification, no generated replacement face, no text or decorations.",
+  "portraits": [
+    {
+      "speaker": "Екатерина Скворцова",
+      "source": "IMG_4107.heic",
+      "output": "dist/assets/speaker-ekaterina.jpg",
+      "refinement": false
+    },
+    {
+      "speaker": "Илья Васюков",
+      "source": "Илья.jpg",
+      "output": "dist/assets/speaker-ilya.jpg",
+      "refinement": true
+    },
+    {
+      "speaker": "Евгения Нестерова",
+      "source": "Женя.jpg",
+      "output": "dist/assets/speaker-evgeniya.jpg",
+      "refinement": false
+    },
+    {
+      "speaker": "Анастасия Ливинцева",
+      "source": "Настя.jpeg",
+      "output": "dist/assets/speaker-anastasia.jpg",
+      "refinement": true
+    }
+  ]
+}
